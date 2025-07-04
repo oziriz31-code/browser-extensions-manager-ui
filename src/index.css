@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* Variable font - modern browsers */
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../assets/fonts/NotoSans-VariableFont_wdth,wght.ttf') format('truetype-variations');
+    src: url('../assets/fonts/NotoSans-VariableFont_wdth,wght.ttf') format('truetype') /*tech('variations')*/;
+    font-weight: 100 900;
+    font-stretch: 75% 125%; /* Matches wdth axis range */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../assets/fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf') format('truetype-variations');
+    src: url('../assets/fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf') format('truetype') /*tech('variations')*/;
+    font-weight: 100 900;
+    font-stretch: 75% 125%;
+    font-style: italic;
+    font-display: swap;
+}
+
+@theme {
+    --font-sans: "Noto Sans", system-ui, -apple-system, sans-serif;
+    --font-display: var(--font-sans);
+
+    /* Light theme colors */
+    --color-bg-gradient-top: #EBF2FC;
+    --color-bg-gradient-middle: #EDF6FB;
+    --color-bg-gradient-bottom: #EFFBFB;
+
+    /* Dark theme colors */
+    --color-dark-bg-gradient-top: #050A1E;
+    --color-dark-bg-gradient-middle: #080F2C;
+    --color-dark-bg-gradient-bottom: #09153C;
+
+    /* Text colors */
+    --color-text-light: #08143C;
+    --color-text-dark: #F8FAFC;
+
+    /* Card colors */
+    --color-card-light: #FFFFFF;
+    --color-card-dark: #1E293B;
+
+    /* Border colors */
+    --color-border-light: #DCE6F0;
+    --color-border-dark: #334155;
+
+    /* Button colors */
+    --color-btn-default-light: #EEEEEE;
+    --color-btn-default-dark: #334155;
+    --color-btn-hover-light: #C6C6C6;
+    --color-btn-hover-dark: #475569;
+
+    /* Primary colors */
+    --color-primary: #DD4841;
+    --color-primary-hover: #CA211C;
+}
+
+@layer base {
+    :root {
+        @apply bg-gradient-to-t from-bg-gradient-bottom to-bg-gradient-top bg-no-repeat min-h-full;
+    }
+
+    [data-theme="dark"] {
+        --color-bg-gradient-top: var(--color-dark-bg-gradient-top);
+        --color-bg-gradient-middle: var(--color-dark-bg-gradient-middle);
+        --color-bg-gradient-bottom: var(--color-dark-bg-gradient-bottom);
+    }
+
+    body {
+        @apply py-10;
+        @apply container mx-auto px-4 md:px-0;
+        color: var(--color-text-light);
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    [data-theme="dark"] body {
+        color: var(--color-text-dark);
+    }
+
+    .card {
+        @apply p-3 md:p-5 rounded-xl md:rounded-3xl shadow;
+        background-color: var(--color-card-light);
+        border: 1px solid var(--color-border-light);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card .name {
+        @apply text-[#08143C];
+    }
+
+    .card .description {
+        @apply text-[#5F616D];
+    }
+
+    [data-theme="dark"] .card {
+        background-color: var(--color-card-dark);
+        border-color: var(--color-border-dark);
+    }
+
+    [data-theme="dark"] .card .name {
+        color: var(--color-text-dark);
+    }
+
+    [data-theme="dark"] .card .description {
+        @apply text-[#7F828E];
+    }
+
+    .btn-default {
+        @apply p-3 rounded-xl cursor-pointer border-transparent;
+        background-color: var(--color-btn-default-light);
+
+        &:hover {
+            background-color: var(--color-btn-hover-light);
+        }
+
+        @apply focus:outline-[#CA211C] focus:outline-2 focus:outline-offset-2;
+    }
+
+    [data-theme="dark"] .btn-default {
+        background-color: var(--color-btn-default-dark);
+
+        &:hover {
+            background-color: var(--color-btn-hover-dark);
+        }
+    }
+
+    .btn-outline-select {
+        @apply py-2 px-5 font-medium rounded-full cursor-pointer;
+        color: var(--color-text-light);
+        border: 1px solid var(--color-border-light);
+        background-color: var(--color-card-light);
+
+        &:hover {
+            background-color: var(--color-bg-gradient-top);
+            color: var(--color-text-light);
+        }
+
+        @apply focus:outline-[#CA211C] focus:outline-2 focus:outline-offset-2;
+    }
+
+    [data-theme="dark"] .btn-outline-select {
+        color: var(--color-text-dark);
+        border-color: var(--color-border-dark);
+        background-color: var(--color-card-dark);
+
+        &:hover {
+            background-color: var(--color-dark-bg-gradient-top);
+            color: var(--color-text-dark);
+        }
+    }
+
+    .btn-outline-default {
+        @apply py-2 px-5 font-medium rounded-full cursor-pointer;
+        color: var(--color-text-light);
+        border: 1px solid var(--color-border-light);
+        background-color: var(--color-card-light);
+
+        &:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        @apply focus:outline-[#CA211C] focus:outline-2 focus:outline-offset-2;
+    }
+
+    [data-theme="dark"] .btn-outline-default {
+        color: var(--color-text-dark);
+        border-color: var(--color-border-dark);
+        background-color: var(--color-card-dark);
+
+        &:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+    }
+
+    .btn-active,
+    [data-theme="dark"] .btn-active {
+        background-color: var(--color-primary);
+
+        &:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        color: white;
+
+        &:hover {
+            color: white;
+        }
+    }
+}
+
+@layer components {
+    .toggle-switch {
+        @apply flex items-center gap-2 cursor-pointer select-none;
+    }
+
+    .toggle-switch-label {
+        @apply text-sm font-medium;
+        color: var(--color-text-light);
+    }
+
+    [data-theme="dark"] .toggle-switch-label {
+        color: var(--color-text-dark);
+    }
+
+    .toggle-switch-container {
+        @apply relative;
+    }
+
+    .toggle-switch-input {
+        @apply sr-only;
+    }
+
+    .toggle-switch-track {
+        @apply w-11 h-6 rounded-full transition-colors duration-200;
+        background-color: var(--color-btn-default-light);
+    }
+
+    [data-theme="dark"] .toggle-switch-track {
+        background-color: var(--color-btn-hover-dark);
+    }
+
+    .peer:checked ~ .toggle-switch-track {
+        background-color: var(--color-primary);
+    }
+
+    .toggle-switch-thumb {
+        @apply absolute top-0.5 left-0.5 w-5 h-5 rounded-full shadow-md transition-transform duration-200;
+        background-color: var(--color-card-light);
+    }
+
+    [data-theme="dark"] .toggle-switch-thumb {
+        background-color: white;
+    }
+
+    .peer:checked ~ .toggle-switch-thumb {
+        @apply translate-x-full;
+    }
+}
